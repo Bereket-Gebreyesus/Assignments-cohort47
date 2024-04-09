@@ -12,11 +12,10 @@ Full description at: https://github.com/HackYourFuture/Assignments/blob/main/3-U
 ------------------------------------------------------------------------------*/
 const rollDie = require('../../helpers/pokerDiceRoller');
 
-async function rollDice() {
+function rollDice() {
   const dice = [1, 2, 3, 4, 5];
   const promises = dice.map(() => rollDie());
-  const result = await Promise.race(promises);
-  return result;
+  return Promise.race(promises);
 }
 
 
@@ -34,3 +33,14 @@ if (process.env.NODE_ENV !== 'test') {
   main();
 }
 module.exports = rollDice;
+
+
+
+
+/*The rollDie() function creates a promise that resolves after a random delay.
+When Promise.race() is used, it resolves with the result of the first promise 
+in the promises array that fulfills or rejects. However, even after one of 
+the promises resolves, the other promises created by rollDie() may still 
+be in a pending state, continuing to execute. This is why you may observe 
+some dice continuing to roll for an undetermined time after the Promise.race() 
+resolves.*/

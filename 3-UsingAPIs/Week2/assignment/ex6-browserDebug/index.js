@@ -28,11 +28,11 @@ function addTableRow(table, label, value) {
   createAndAppend('td', tr, { text: value });
 }
 
-function renderLaureate(ul, { knownName, birth, death }) {
+function renderLaureate(ul, { knownName: { en: name }, birth: { date, place: { locationString } }, death }) {
   const li = createAndAppend('li', ul);
   const table = createAndAppend('table', li);
-  addTableRow(table, 'Name', knownName.en);
-  addTableRow(table, 'Birth', `${birth.date}, ${birth.place.locationString}`);
+  addTableRow(table, 'Name', name);
+  addTableRow(table, 'Birth', `${date}, ${locationString}`);
   if (death) {
     addTableRow(table, 'Death', `${death.date}, ${death.place.locationString}`);
   }

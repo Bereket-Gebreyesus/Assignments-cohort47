@@ -18,26 +18,19 @@ Full description at: https://github.com/HackYourFuture/Assignments/blob/main/3-U
    should result in a network (DNS) error.
 ------------------------------------------------------------------------------*/
 function requestData(url) {
-  return new Promise((resolve, reject) => {
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    });
 }
 
 function renderImage(data) {
   const img = document.createElement('img');
   img.src = data.img;
+  img.alt = data.altText;
   document.body.appendChild(img);
   console.log(data);
 }
