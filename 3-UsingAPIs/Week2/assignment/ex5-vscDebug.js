@@ -3,7 +3,7 @@
 Full description at: https://github.com/HackYourFuture/Assignments/blob/main/3-UsingAPIs/Week2/README.md#exercise-5-using-the-vscode-debugger
 
 Use the VSCode Debugger to fix the bugs
---------------------------------------------------------------- --------------*/
+------------------------------------------------------------------------------*/
 
 const fetch = require('node-fetch');
 
@@ -12,8 +12,7 @@ async function getData(url) {
   return response.json();
 }
 
-function renderLaureate(laureate) {
-  const { knownName: { en: name }, birth, death } = laureate;
+function renderLaureate({ knownName: { en: name }, birth, death }) {
   console.log(`\nName: ${name}`);
   console.log(`Birth: ${birth.date}, ${birth.place.locationString}`);
   if (death) {

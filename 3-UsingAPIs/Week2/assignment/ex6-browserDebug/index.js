@@ -28,13 +28,21 @@ function addTableRow(table, label, value) {
   createAndAppend('td', tr, { text: value });
 }
 
-function renderLaureate(ul, { knownName: { en: name }, birth: { date, place: { locationString } }, death }) {
+function renderLaureate(ul, { knownName: { en: name }, birth, death }) {
   const li = createAndAppend('li', ul);
   const table = createAndAppend('table', li);
-  addTableRow(table, 'Name', name);
-  addTableRow(table, 'Birth', `${date}, ${locationString}`);
+  
+  // Destructuring birth object
+  const { date: birthDate, place: { locationString: { en: birthLocation } } } = birth; 
   if (death) {
-    addTableRow(table, 'Death', `${death.date}, ${death.place.locationString}`);
+    // Destructuring death object
+    const { date: deathDate, place: { locationString: { en: deathLocation } } } = death;
+    addTableRow(table, 'Name', name);
+    addTableRow(table, 'Birth', `${birthDate}, ${birthLocation}`);
+    addTableRow(table, 'Death', `${deathDate}, ${deathLocation}`);
+  } else {
+    addTableRow(table, 'Name', name);
+    addTableRow(table, 'Birth', `${birthDate}, ${birthLocation}`);
   }
 }
 
